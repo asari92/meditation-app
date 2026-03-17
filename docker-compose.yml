@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    ports:
+      - "19000:19000"  # Expo dev server
+      - "19001:19001"  # Metro bundler
+      - "19002:19002"  # Expo web
+      - "8081:8081"    # React Native debugger
+    volumes:
+      - .:/app          # Пробрасываем исходники для hot reload
+      - /app/node_modules # Изолируем node_modules внутри контейнера
+    environment:
+      - NODE_ENV=development
+      - EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0
+      - REACT_NATIVE_PACKAGER_HOSTNAME=0.0.0.0
+    stdin_open: true
+    tty: true

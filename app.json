@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "MeditationApp",
+    "slug": "meditation-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.meditation.app"
+    },
+    "android": {
+      "package": "com.meditation.app"
+    }
+  }
+}
