@@ -1,5 +1,5 @@
 # Dockerfile для Expo React Native development
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
