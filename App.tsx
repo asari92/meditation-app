@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
+  Platform,
 } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -57,6 +58,11 @@ export default function App() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleGeneratePress = () => {
+    if (!selectedMood || loading) return;
+    handleGenerateAffirmation();
   };
 
   // Paywall Screen
@@ -227,8 +233,7 @@ export default function App() {
               styles.ctaButton,
               (!selectedMood || loading) && styles.disabledButton,
             ]}
-            onPress={handleGenerateAffirmation}
-            disabled={!selectedMood || loading}
+            onPress={handleGeneratePress}
             activeOpacity={0.8}
           >
             <Text style={styles.ctaText}>
@@ -316,14 +321,21 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     alignItems: 'center',
     marginBottom: 18,
-    shadowColor: '#C8843B',
-    shadowOpacity: 0.18,
-    shadowRadius: 14,
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    elevation: 4,
+    ...Platform.select({
+      web: {
+        boxShadow: '0px 8px 14px rgba(200, 132, 59, 0.18)',
+      },
+      default: {
+        shadowColor: '#C8843B',
+        shadowOpacity: 0.18,
+        shadowRadius: 14,
+        shadowOffset: {
+          width: 0,
+          height: 8,
+        },
+        elevation: 4,
+      },
+    }),
   },
   paywallCtaText: {
     color: '#FFFFFF',
@@ -340,19 +352,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
     marginBottom: 16,
-    shadowColor: '#C8843B',
-    shadowOpacity: 0.18,
-    shadowRadius: 14,
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    elevation: 4,
+    ...Platform.select({
+      web: {
+        boxShadow: '0px 8px 14px rgba(200, 132, 59, 0.18)',
+      },
+      default: {
+        shadowColor: '#C8843B',
+        shadowOpacity: 0.18,
+        shadowRadius: 14,
+        shadowOffset: {
+          width: 0,
+          height: 8,
+        },
+        elevation: 4,
+      },
+    }),
   },
   disabledButton: {
     backgroundColor: '#CDB79A',
-    shadowOpacity: 0,
-    elevation: 0,
+    ...Platform.select({
+      web: {
+        boxShadow: 'none',
+      },
+      default: {
+        shadowOpacity: 0,
+        elevation: 0,
+      },
+    }),
   },
   ctaText: {
     color: '#FFFFFF',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 
 interface PlanCardProps {
   title: string;
@@ -90,19 +90,33 @@ const styles = StyleSheet.create({
   selected: {
     borderColor: '#C8843B',
     backgroundColor: '#FFF7ED',
-    shadowColor: '#C8843B',
-    shadowOpacity: 0.12,
-    shadowRadius: 14,
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    elevation: 4,
+    ...Platform.select({
+      web: {
+        boxShadow: '0px 6px 14px rgba(200, 132, 59, 0.12)',
+      },
+      default: {
+        shadowColor: '#C8843B',
+        shadowOpacity: 0.12,
+        shadowRadius: 14,
+        shadowOffset: {
+          width: 0,
+          height: 6,
+        },
+        elevation: 4,
+      },
+    }),
   },
   selectedFeatured: {
     borderColor: '#F6C98A',
     backgroundColor: '#2D3436',
-    shadowColor: '#2D3436',
+    ...Platform.select({
+      web: {
+        boxShadow: '0px 6px 14px rgba(45, 52, 54, 0.16)',
+      },
+      default: {
+        shadowColor: '#2D3436',
+      },
+    }),
   },
   content: {
     flex: 1,
