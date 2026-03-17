@@ -159,16 +159,20 @@ export default function App() {
             <View style={styles.listContainer}>
               {[...meditations]
                 .sort((a, b) => parseInt(a.duration, 10) - parseInt(b.duration, 10))
-                .map((meditation) => (
-                  <MeditationCard
-                    key={meditation.id}
-                    title={meditation.title}
-                    duration={meditation.duration}
-                    locked={meditation.locked}
-                    onPress={() => handleMeditationPress(meditation)}
-                    selected={selectedMeditationId === meditation.id}
-                  />
-                ))}
+                .map((meditation) => {
+                  const isLocked = meditation.locked && !isSubscribed;
+
+                  return (
+                    <MeditationCard
+                      key={meditation.id}
+                      title={meditation.title}
+                      duration={meditation.duration}
+                      locked={isLocked}
+                      onPress={() => handleMeditationPress(meditation)}
+                      selected={selectedMeditationId === meditation.id}
+                    />
+                  );
+                })}
             </View>
 
             <TouchableOpacity
