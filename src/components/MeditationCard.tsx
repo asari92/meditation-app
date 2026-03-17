@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ImageSourcePropType } from 'react-native';
 
 interface MeditationCardProps {
   title: string;
   duration: string;
   locked: boolean;
+  imageSource: ImageSourcePropType;
   onPress: () => void;
   selected?: boolean;
 }
@@ -13,6 +14,7 @@ export const MeditationCard: React.FC<MeditationCardProps> = ({
   title,
   duration,
   locked,
+  imageSource,
   onPress,
   selected,
 }) => {
@@ -25,11 +27,10 @@ export const MeditationCard: React.FC<MeditationCardProps> = ({
       }}
       activeOpacity={0.8}
     >
+      <Image source={imageSource} style={[styles.image, locked && styles.imageLocked]} />
       <View style={styles.content}>
         <Text style={[styles.title, locked && styles.lockedText]}>{title}</Text>
-        <Text style={[styles.duration, locked && styles.lockedSubtext]}>
-          {duration}
-        </Text>
+        <Text style={[styles.duration, locked && styles.lockedSubtext]}>{duration}</Text>
       </View>
       {locked && (
         <View style={styles.lockIcon}>
@@ -59,6 +60,17 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    justifyContent: 'center',
+  },
+  image: {
+    width: 92,
+    height: 92,
+    borderRadius: 16,
+    marginRight: 16,
+    backgroundColor: '#E9DED1',
+  },
+  imageLocked: {
+    opacity: 0.55,
   },
   title: {
     fontSize: 18,

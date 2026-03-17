@@ -168,6 +168,7 @@ export default function App() {
                       title={meditation.title}
                       duration={meditation.duration}
                       locked={isLocked}
+                      imageSource={meditation.imageSource}
                       onPress={() => handleMeditationPress(meditation)}
                       selected={selectedMeditationId === meditation.id}
                     />
