@@ -1,5 +1,7 @@
 # ZenPulse: AI Meditation App
 
+[Русская версия](./README.ru.md)
+
 React Native + Expo test assignment for a mobile meditation prototype with subscription gating, meditation cards, and AI-generated mood affirmations.
 
 ## Overview
